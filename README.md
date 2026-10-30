@@ -18,6 +18,16 @@ python -m bot.followers --fixture examples/sample_profiles.json --out report.md
 ## Run (GitHub Actions)
 Actions の「follower-report」ワークフローを手動実行（workflow_dispatch）すると、指定ユーザーのレポートを生成して artifact にアップロードします。
 
+## Auto watch（フォロワーの変化で自動実行）
+
+GitHub Actions には「フォロワーが増えた」イベントが無いので、「follower-watch」ワークフローが1時間に1回フォロワー一覧をポーリングし、リポジトリ内の状態ファイル（`data/followers-state.json`）と比較します。増減があったときだけレポートを再生成し、状態ファイルとレポート（`reports/followers.md`）をリポジトリへ自動コミットします。変化が無ければ何もコミットしません。初回実行はベースライン作成として、全フォロワーのレポートを作ります。検知までの遅延は最大で約1時間＋GitHub スケジューラの遅延です。
+
+手動でも実行できます（workflow_dispatch、対象ユーザーの既定値は Arbeit2025）。ローカルでは次でも試せます。
+
+```
+python -m bot.watch --user Arbeit2025
+```
+
 ## Tags
 - organization：Organization アカウント
 - bot-like：ログイン名や bio に bot 系の手がかり
