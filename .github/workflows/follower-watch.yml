@@ -1,0 +1,47 @@
+name: follower-watch
+
+# Polls the follower list on a schedule: GitHub Actions has no
+# "new follower" event, so this checks every hour and, only when the
+# follower set changed, regenerates the report and commits the new
+# state + report back to the repository.
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+    inputs:
+      user:
+        description: "GitHub username to watch"
+        required: true
+        default: "Arbeit2025"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: follower-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check followers and refresh the report on change
+        id: watch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m bot.watch \
+            --user "${{ inputs.user != '' && inputs.user || 'Arbeit2025' }}"
+      - name: Commit updated state and report
+        if: steps.watch.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/followers-state.json reports/followers.md
+          git commit -m "Update followers report (change detected by follower-watch)"
+          git push
