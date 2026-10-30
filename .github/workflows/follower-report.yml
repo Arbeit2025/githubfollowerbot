@@ -1,0 +1,35 @@
+name: follower-report
+
+on:
+  workflow_dispatch:
+    inputs:
+      user:
+        description: "GitHub username to inspect"
+        required: true
+        default: "Arbeit2025"
+      limit:
+        description: "Max followers to profile (0 = all)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Generate followers report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m bot.followers --user "${{ inputs.user }}" \
+            --limit "${{ inputs.limit }}" --out followers-report.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: followers-report
+          path: followers-report.md
