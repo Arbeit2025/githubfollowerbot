@@ -1,15 +1,21 @@
 # GitHub followers report: @Arbeit2025
 
-- Followers checked: 5
+- Followers checked: 6
 - Organizations: 0
 
 ## Tags (rule-based, from public profile fields)
 
-- developer: 4
+- developer: 5
 - bot-like: 2
 - student: 1
 
 ## Followers
+
+### [arcelen](https://github.com/arcelen) Arcelen
+
+- tags: developer / repos: 6 / followers: 7 / following: 69 / since: 2023-07-24
+- bio: CS Graduate | Founder of lightmenu.app | Barcelona
+- Barcelona, Spain
 
 ### [mofu-mitsu](https://github.com/mofu-mitsu) もふみつ
 
@@ -17,13 +23,13 @@
 
 ### [yumiaura](https://github.com/yumiaura) Olya Pi
 
-- tags: developer / repos: 40 / followers: 8439 / following: 26493 / since: 2025-09-29
+- tags: developer / repos: 40 / followers: 8472 / following: 26997 / since: 2025-09-29
 - bio: Astrologist, Psychologist, Developer.
 - 192.168.0.1
 
 ### [shahidazam2020-oss](https://github.com/shahidazam2020-oss) Shahid Azam
 
-- tags: bot-like, developer / repos: 24 / followers: 5569 / following: 51753 / since: 2025-11-09
+- tags: bot-like, developer / repos: 24 / followers: 5618 / following: 52751 / since: 2025-11-09
 - bio: 🎓 MSCS Candidate @ IMSciences Peshawar | AI & Healthcare ML Researcher (EEG Seizure Prediction) | Building Scalable Deep Learning Solutions
 - Institute of Management Sciences, Peshawar /  Cabinet Division Employees CHS E-17/3 E-17, Islamabad
 
@@ -35,7 +41,7 @@
 
 ### [ancaferro](https://github.com/ancaferro) Anca Kovach
 
-- tags: developer / repos: 4 / followers: 2783 / following: 5376 / since: 2026-05-24
+- tags: developer / repos: 4 / followers: 2789 / following: 5780 / since: 2026-05-24
 - bio: QA Engineer, Developer
 - Beograd, Srbija
 
