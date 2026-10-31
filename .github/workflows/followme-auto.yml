@@ -1,0 +1,74 @@
+name: followme-auto
+
+# Daily automatic follow for followme-lite (follow only, never stars).
+#
+# Runs bot.discover --apply --follow-only once a day. The code enforces
+# the caps itself: at most 3 follows per run and at most 3 follows per
+# day (Asia/Tokyo), counted across runs from the follow log kept in
+# data/discover-state.json, which this workflow commits back.
+#
+# Activation requirement: a classic personal access token with the
+# `user:follow` scope, stored as the repository Actions secret
+# FOLLOWME_TOKEN (Settings -> Secrets and variables -> Actions).
+# Without that secret this workflow does nothing except print a notice
+# and succeed — the built-in GITHUB_TOKEN cannot follow users as the
+# account owner, and no follow is ever attempted with it.
+
+on:
+  schedule:
+    - cron: "23 1 * * *"  # 10:23 JST daily
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Repositories to grade this run"
+        required: true
+        default: "20"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: followme-auto
+  cancel-in-progress: false
+
+jobs:
+  auto-follow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Check for the follow token
+        id: gate
+        env:
+          FOLLOWME_TOKEN: ${{ secrets.FOLLOWME_TOKEN }}
+        run: |
+          if [ -z "$FOLLOWME_TOKEN" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::FOLLOWME_TOKEN secret is not set; skipping auto-follow. Add a classic PAT with the user:follow scope as the FOLLOWME_TOKEN repository secret to activate."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Discover and follow (max 3 per day)
+        if: steps.gate.outputs.ready == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.FOLLOWME_TOKEN }}
+        run: |
+          python -m bot.discover --apply --follow-only \
+            --count "${{ inputs.count != '' && inputs.count || '20' }}" \
+            --language Python \
+            --state data/discover-state.json \
+            --out reports/discover.md
+      - name: Commit state and report
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/discover-state.json reports/discover.md
+          if git diff --cached --quiet; then
+            echo "no state change"
+          else
+            git commit -m "Update followme-lite state (auto-follow run)"
+            git push
+          fi
