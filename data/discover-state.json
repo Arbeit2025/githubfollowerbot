@@ -1,0 +1,27 @@
+{
+  "seen": [
+    "Leuven-Gravity-Institute/gwmock-noise",
+    "sidharthjoly/ClassSniper"
+  ],
+  "followed": [
+    "Leuven-Gravity-Institute",
+    "sidharthjoly"
+  ],
+  "followed_at": {
+    "Leuven-Gravity-Institute": "2026-10-31T01:54:00+00:00",
+    "sidharthjoly": "2026-10-31T01:54:00+00:00"
+  },
+  "follow_log": [
+    {
+      "login": "sidharthjoly",
+      "followed_at": "2026-10-31T01:54:00+00:00"
+    },
+    {
+      "login": "Leuven-Gravity-Institute",
+      "followed_at": "2026-10-31T01:54:00+00:00"
+    }
+  ],
+  "starred": [],
+  "unfollowed": [],
+  "updated_at": "2026-10-31T01:56:32+00:00"
+}
