@@ -1,14 +1,36 @@
 {
   "seen": [
+    "1lkei/url-p",
+    "KKawamura1/3d-printer",
+    "KaifenChang/gym",
+    "Ledrec/Bot",
     "Leuven-Gravity-Institute/gwmock-noise",
-    "sidharthjoly/ClassSniper"
+    "Maximoquirogaa/taller_backend",
+    "Medialoco/ventoux-watch",
+    "MrGabee/mentoheli",
+    "WebDevHarsha/ETL-float-chat",
+    "adamblackwood/Bot",
+    "bharathmrperfect143-oss/crypto-bot",
+    "bogdanstancu1119-maker/psie-arca",
+    "cyclonecizek/ER_Weather_COP",
+    "echileno/monitor-imoveis-sbc",
+    "gdevenyi/RabbleFish",
+    "gusghdkrl-dotcom/TRPG-RULE",
+    "linjingkayy/pale-bridge-192",
+    "lucataco/cog-Seed-X-PPO-7B",
+    "mediajunkie/piper-morgan-product",
+    "sidharthjoly/ClassSniper",
+    "tim8es/book-translator-private",
+    "winson-00178005/build-eye"
   ],
   "followed": [
     "Leuven-Gravity-Institute",
+    "mediajunkie",
     "sidharthjoly"
   ],
   "followed_at": {
     "Leuven-Gravity-Institute": "2026-10-31T01:54:00+00:00",
+    "mediajunkie": "2026-10-31T02:51:57+00:00",
     "sidharthjoly": "2026-10-31T01:54:00+00:00"
   },
   "follow_log": [
@@ -19,9 +41,13 @@
     {
       "login": "Leuven-Gravity-Institute",
       "followed_at": "2026-10-31T01:54:00+00:00"
+    },
+    {
+      "login": "mediajunkie",
+      "followed_at": "2026-10-31T02:51:57+00:00"
     }
   ],
   "starred": [],
   "unfollowed": [],
-  "updated_at": "2026-10-31T01:56:32+00:00"
+  "updated_at": "2026-10-31T02:51:57+00:00"
 }
