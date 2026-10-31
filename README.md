@@ -28,6 +28,23 @@ GitHub Actions には「フォロワーが増えた」イベントが無いの�
 python -m bot.watch --user Arbeit2025
 ```
 
+## followme-lite（リポジトリ発見→採点→follow/star候補）
+
+yumiaura/followme の「仕組み」に着想を得た軽量版です（本家にライセンスが無いためコードは複製せず、パイプラインの形と既定の閾値だけを引き継いだ独自実装）。本家との違いは、clone＋ローカルLLM（Ollama）での採点を、公開メタデータだけを使うルールベース採点に置き換えたことです。そのため GitHub Actions でもそのまま動きます。
+
+流れ：GitHub Search で最近更新されたリポジトリを取得 → 説明文・トピック・スター・フォーク・更新の新しさ・サイズ・ライセンスから `idea` / `skill` を各1.0〜10.0で採点 → 合計が **14超でfollow候補、16超でstar候補**（本家の既定値と同じ）。
+
+```
+# 候補レポートだけ（dry-run、既定。follow/star は実行しません）
+python -m bot.discover --fixture examples/sample_repos.json --out report.md
+python -m bot.discover --count 5 --language Python --out reports/discover.md
+
+# 実際に follow/star する（個人トークンが必要。ローカルでのみ）
+GITHUB_TOKEN=... python -m bot.discover --apply
+```
+
+安全策：既定は dry-run で状態ファイルも変更しません。`--apply` のときだけ実行し、1回あたりの上限は follow 5件・star 10件まで。fork・アーカイブ済み・botアカウント・自分のリポジトリは除外し、実行済みは状態ファイル（`data/discover-state.json`）に記録して二度は実行しません。Actions の「followme-discover」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです（定期的な自動follow/starはしません）。
+
 ## Tags
 - organization：Organization アカウント
 - bot-like：ログイン名や bio に bot 系の手がかり
