@@ -1,0 +1,49 @@
+name: followme-discover
+
+# Manual-only candidate finder for the followme-lite feature.
+# It always runs as a DRY RUN: the report is uploaded as an artifact and
+# nobody is followed and nothing is starred from Actions. Actually
+# following/starring needs a personal token with follow/star permission
+# and is done locally on purpose:
+#   GITHUB_TOKEN=... python -m bot.discover --apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "Repositories to grade"
+        required: true
+        default: "5"
+      language:
+        description: "Primary language to search"
+        required: true
+        default: "Python"
+      max_stars:
+        description: "Only repos with fewer stars than this"
+        required: true
+        default: "100"
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Grade candidate repositories (dry run)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m bot.discover \
+            --count "${{ inputs.count }}" \
+            --language "${{ inputs.language }}" \
+            --max-stars "${{ inputs.max_stars }}" \
+            --out reports/discover.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: followme-discover-report
+          path: reports/discover.md
