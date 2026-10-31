@@ -45,6 +45,20 @@ GITHUB_TOKEN=... python -m bot.discover --apply
 
 安全策：既定は dry-run で状態ファイルも変更しません。`--apply` のときだけ実行し、1回あたりの上限は follow 5件・star 10件まで。fork・アーカイブ済み・botアカウント・自分のリポジトリは除外し、実行済みは状態ファイル（`data/discover-state.json`）に記録して二度は実行しません。Actions の「followme-discover」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです（定期的な自動follow/starはしません）。
 
+## followback（フォローバックが無い相手のフォロー解除）
+
+`bot.discover --apply` でフォローした相手だけを対象に、フォローした日時を状態ファイルへ記録します。その後、`bot.followback` が「フォローから31日以上経ち、相手がフォローバックしていない」相手を解除候補にします。
+
+```
+# 候補レポートだけ（dry-run、既定。解除は実行しません）
+python -m bot.followback --self Arbeit2025
+
+# 実際に解除する（個人トークンが必要。ローカルでのみ、1回5件まで）
+GITHUB_TOKEN=... python -m bot.followback --self Arbeit2025 --apply
+```
+
+安全策：対象はこのツールがフォローした相手のみで、手動でフォローした相手には触りません。フォロー日時が記録されていない相手（この機能より前の状態）は「日数が証明できない」ため自動解除の対象外です。解除した相手は状態ファイルの履歴に残り、discover が再フォローすることもありません。Actions の「followback-check」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです。
+
 ## Tags
 - organization：Organization アカウント
 - bot-like：ログイン名や bio に bot 系の手がかり

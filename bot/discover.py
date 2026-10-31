@@ -191,6 +191,9 @@ def _parse_ts(value: str) -> datetime | None:
         return None
 
 
+parse_ts = _parse_ts
+
+
 def _clamp(value: float) -> float:
     return max(1.0, min(10.0, round(value, 2)))
 
@@ -287,6 +290,8 @@ def select_candidates(scored: list[dict], state: dict, self_login: str | None = 
     now = now or datetime.now(timezone.utc)
     followed = set(state.get("followed", []))
     starred = set(state.get("starred", []))
+    unfollowed_owners = {str(e.get("login") if isinstance(e, dict) else e)
+                         for e in state.get("unfollowed", [])}
     follows: list[dict] = []
     stars: list[dict] = []
     seen_owners: set[str] = set()
@@ -302,6 +307,7 @@ def select_candidates(scored: list[dict], state: dict, self_login: str | None = 
             if len(stars) < max_star:
                 stars.append(entry)
         if score["total"] > follow_threshold and repo["owner"] not in followed \
+                and repo["owner"] not in unfollowed_owners \
                 and repo["owner"] not in seen_owners:
             if len(follows) < max_follow:
                 follows.append(entry)
@@ -318,19 +324,43 @@ def load_state(path) -> dict:
         data = {}
     if not isinstance(data, dict):
         data = {}
+    followed = sorted(str(x) for x in data.get("followed", []) if isinstance(x, str))
+    raw_followed_at = data.get("followed_at") or {}
+    followed_at = {}
+    if isinstance(raw_followed_at, dict):
+        for login in followed:
+            stamp = raw_followed_at.get(login)
+            if isinstance(stamp, str) and stamp:
+                followed_at[login] = stamp
+    unfollowed = []
+    for entry in data.get("unfollowed", []) or []:
+        if isinstance(entry, dict) and entry.get("login"):
+            unfollowed.append({"login": str(entry["login"]),
+                               "unfollowed_at": str(entry.get("unfollowed_at") or ""),
+                               "reason": str(entry.get("reason") or "")})
+        elif isinstance(entry, str):
+            unfollowed.append({"login": entry, "unfollowed_at": "", "reason": ""})
     return {
         "seen": sorted(str(x) for x in data.get("seen", []) if isinstance(x, str)),
-        "followed": sorted(str(x) for x in data.get("followed", []) if isinstance(x, str)),
+        "followed": followed,
+        "followed_at": followed_at,
         "starred": sorted(str(x) for x in data.get("starred", []) if isinstance(x, str)),
+        "unfollowed": unfollowed,
         "updated_at": data.get("updated_at"),
     }
 
 
 def save_state(path, state: dict) -> dict:
+    followed = sorted(set(state.get("followed", [])))
+    followed_at = {login: str(state.get("followed_at", {}).get(login))
+                   for login in followed
+                   if state.get("followed_at", {}).get(login)}
     payload = {
         "seen": sorted(set(state.get("seen", []))),
-        "followed": sorted(set(state.get("followed", []))),
+        "followed": followed,
+        "followed_at": followed_at,
         "starred": sorted(set(state.get("starred", []))),
+        "unfollowed": list(state.get("unfollowed", [])),
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     target = Path(path)
@@ -424,6 +454,11 @@ def run(repos: list[dict], state_path=DEFAULT_STATE, report_path=DEFAULT_REPORT,
             starred_now.append(full_name)
         state["seen"] = sorted(set(state["seen"]) | {e["repo"]["full_name"] for e in scored})
         state["followed"] = sorted(set(state["followed"]) | set(followed_now))
+        stamp = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
+        followed_at = dict(state.get("followed_at", {}))
+        for login in followed_now:
+            followed_at.setdefault(login, stamp)
+        state["followed_at"] = followed_at
         state["starred"] = sorted(set(state["starred"]) | set(starred_now))
         save_state(state_path, state)
 
