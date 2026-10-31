@@ -21,7 +21,9 @@ mass-following automation the follower report itself flags as bot-like):
 
   * dry-run is the default; ``--apply`` needs a personal token in
     GITHUB_TOKEN with follow/star permission,
-  * hard per-run caps (default: follow at most 5, star at most 10),
+  * hard caps: follow at most 3 per run AND at most 3 per day
+    (Asia/Tokyo, counted across runs from an append-only follow log),
+    star at most 10 per run,
   * forks, archived repos, bot accounts and your own repos are excluded,
   * state (data/discover-state.json) remembers seen/followed/starred so
     nothing is acted on twice, and a dry run never mutates that state.
@@ -41,13 +43,18 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
+
+# "Per day" for the follow cap is counted in the account owner's day.
+OWNER_TZ = ZoneInfo("Asia/Tokyo")
 
 API = "https://api.github.com"
 
 DEFAULT_FOLLOW_THRESHOLD = 14.0
 DEFAULT_STAR_THRESHOLD = 16.0
 DEFAULT_WINDOW_HOURS = 24
-DEFAULT_MAX_FOLLOW = 5
+DEFAULT_MAX_FOLLOW = 3
+DEFAULT_MAX_FOLLOW_PER_DAY = 3
 DEFAULT_MAX_STAR = 10
 DEFAULT_STATE = "data/discover-state.json"
 DEFAULT_REPORT = "reports/discover.md"
@@ -340,10 +347,16 @@ def load_state(path) -> dict:
                                "reason": str(entry.get("reason") or "")})
         elif isinstance(entry, str):
             unfollowed.append({"login": entry, "unfollowed_at": "", "reason": ""})
+    follow_log = []
+    for entry in data.get("follow_log", []) or []:
+        if isinstance(entry, dict) and entry.get("login") and entry.get("followed_at"):
+            follow_log.append({"login": str(entry["login"]),
+                               "followed_at": str(entry["followed_at"])})
     return {
         "seen": sorted(str(x) for x in data.get("seen", []) if isinstance(x, str)),
         "followed": followed,
         "followed_at": followed_at,
+        "follow_log": follow_log,
         "starred": sorted(str(x) for x in data.get("starred", []) if isinstance(x, str)),
         "unfollowed": unfollowed,
         "updated_at": data.get("updated_at"),
@@ -359,6 +372,7 @@ def save_state(path, state: dict) -> dict:
         "seen": sorted(set(state.get("seen", []))),
         "followed": followed,
         "followed_at": followed_at,
+        "follow_log": list(state.get("follow_log", [])),
         "starred": sorted(set(state.get("starred", []))),
         "unfollowed": list(state.get("unfollowed", [])),
         "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -368,6 +382,25 @@ def save_state(path, state: dict) -> dict:
     target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                       encoding="utf-8")
     return payload
+
+
+def _day_key(moment: datetime) -> str:
+    return moment.astimezone(OWNER_TZ).date().isoformat()
+
+
+def follows_today(state: dict, now: datetime | None = None) -> int:
+    """Follows already made on the owner's current day (Asia/Tokyo),
+    counted from the append-only follow_log so the daily cap holds
+    across runs and even across later unfollows."""
+    now = now or datetime.now(timezone.utc)
+    today = _day_key(now)
+    count = 0
+    for entry in state.get("follow_log", []):
+        stamp = parse_ts(str(entry.get("followed_at") or "")) \
+            if isinstance(entry, dict) else None
+        if stamp is not None and _day_key(stamp) == today:
+            count += 1
+    return count
 
 
 # ---------------------------------------------------------------- report
@@ -427,6 +460,8 @@ def run(repos: list[dict], state_path=DEFAULT_STATE, report_path=DEFAULT_REPORT,
         window_hours: int = DEFAULT_WINDOW_HOURS,
         max_follow: int = DEFAULT_MAX_FOLLOW,
         max_star: int = DEFAULT_MAX_STAR,
+        max_follow_per_day: int = DEFAULT_MAX_FOLLOW_PER_DAY,
+        follow_only: bool = False,
         now: datetime | None = None,
         follow_fn=None, star_fn=None) -> dict:
     state = load_state(state_path)
@@ -441,24 +476,36 @@ def run(repos: list[dict], state_path=DEFAULT_STATE, report_path=DEFAULT_REPORT,
 
     followed_now: list[str] = []
     starred_now: list[str] = []
+    skipped_daily_cap = 0
+    already_today = follows_today(state, now)
     if apply:
         if follow_fn is None or star_fn is None:
             raise ValueError("apply mode needs follow/star functions (a token)")
-        for entry in candidates["follow"]:
+        follow_entries = candidates["follow"]
+        if max_follow_per_day and max_follow_per_day > 0:
+            remaining = max(0, max_follow_per_day - already_today)
+            skipped_daily_cap = max(0, len(follow_entries) - remaining)
+            follow_entries = follow_entries[:remaining]
+        for entry in follow_entries:
             owner = entry["repo"]["owner"]
             follow_fn(owner)  # False means "already following": still sync state
             followed_now.append(owner)
-        for entry in candidates["star"]:
-            full_name = entry["repo"]["full_name"]
-            star_fn(full_name)
-            starred_now.append(full_name)
+        if not follow_only:
+            for entry in candidates["star"]:
+                full_name = entry["repo"]["full_name"]
+                star_fn(full_name)
+                starred_now.append(full_name)
         state["seen"] = sorted(set(state["seen"]) | {e["repo"]["full_name"] for e in scored})
         state["followed"] = sorted(set(state["followed"]) | set(followed_now))
         stamp = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
         followed_at = dict(state.get("followed_at", {}))
+        follow_log = list(state.get("follow_log", []))
         for login in followed_now:
+            if login not in followed_at:
+                follow_log.append({"login": login, "followed_at": stamp})
             followed_at.setdefault(login, stamp)
         state["followed_at"] = followed_at
+        state["follow_log"] = follow_log
         state["starred"] = sorted(set(state["starred"]) | set(starred_now))
         save_state(state_path, state)
 
@@ -468,7 +515,9 @@ def run(repos: list[dict], state_path=DEFAULT_STATE, report_path=DEFAULT_REPORT,
                                     star_threshold, window_hours), encoding="utf-8")
     return {"graded": len(scored), "follow_candidates": candidates["follow"],
             "star_candidates": candidates["star"], "applied": apply,
-            "followed": followed_now, "starred": starred_now}
+            "followed": followed_now, "starred": starred_now,
+            "follows_today_before": already_today,
+            "skipped_daily_cap": skipped_daily_cap}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -482,7 +531,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--star-threshold", type=float, default=DEFAULT_STAR_THRESHOLD)
     parser.add_argument("--window-hours", type=int, default=DEFAULT_WINDOW_HOURS)
     parser.add_argument("--max-follow", type=int, default=DEFAULT_MAX_FOLLOW)
+    parser.add_argument("--max-follow-per-day", type=int, default=DEFAULT_MAX_FOLLOW_PER_DAY,
+                        help="daily follow cap across runs, counted in Asia/Tokyo (0 = no daily cap)")
     parser.add_argument("--max-star", type=int, default=DEFAULT_MAX_STAR)
+    parser.add_argument("--follow-only", action="store_true",
+                        help="with --apply, follow but never star")
     parser.add_argument("--state", default=DEFAULT_STATE)
     parser.add_argument("--out", default=DEFAULT_REPORT)
     parser.add_argument("--apply", action="store_true",
@@ -511,11 +564,15 @@ def main(argv: list[str] | None = None) -> int:
     result = run(repos, args.state, args.out, apply=args.apply, self_login=self_login,
                  follow_threshold=args.follow_threshold, star_threshold=args.star_threshold,
                  window_hours=args.window_hours, max_follow=args.max_follow,
-                 max_star=args.max_star, follow_fn=follow_fn, star_fn=star_fn)
+                 max_star=args.max_star, max_follow_per_day=args.max_follow_per_day,
+                 follow_only=args.follow_only, follow_fn=follow_fn, star_fn=star_fn)
     mode = "applied" if args.apply else "dry-run"
     print(f"[{mode}] graded {result['graded']} repo(s); "
           f"follow candidates: {len(result['follow_candidates'])}; "
-          f"star candidates: {len(result['star_candidates'])}; wrote {args.out}")
+          f"star candidates: {len(result['star_candidates'])}; "
+          f"followed: {len(result['followed'])} "
+          f"(today before this run: {result['follows_today_before']}, "
+          f"skipped by daily cap: {result['skipped_daily_cap']}); wrote {args.out}")
     return 0
 
 

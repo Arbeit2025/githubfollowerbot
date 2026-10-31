@@ -43,7 +43,11 @@ python -m bot.discover --count 5 --language Python --out reports/discover.md
 GITHUB_TOKEN=... python -m bot.discover --apply
 ```
 
-安全策：既定は dry-run で状態ファイルも変更しません。`--apply` のときだけ実行し、1回あたりの上限は follow 5件・star 10件まで。fork・アーカイブ済み・botアカウント・自分のリポジトリは除外し、実行済みは状態ファイル（`data/discover-state.json`）に記録して二度は実行しません。Actions の「followme-discover」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです（定期的な自動follow/starはしません）。
+安全策：既定は dry-run で状態ファイルも変更しません。`--apply` のときだけ実行し、上限は **follow は1回3件まで、かつ1日（Asia/Tokyo）合計3件まで**（実行をまたいでも状態ファイルのフォローログで数えます）、star は1回10件まで。fork・アーカイブ済み・botアカウント・自分のリポジトリは除外し、実行済みは状態ファイル（`data/discover-state.json`）に記録して二度は実行しません。Actions の「followme-discover」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです。
+
+### 自動フォロー（1日最大3件）
+
+「followme-auto」ワークフローが毎日10:23 JST に1回、`--apply --follow-only`（スターはしない）で自動フォローし、状態ファイルとレポートを自動コミットします。有効化には、classic な個人アクセストークン（スコープ `user:follow`）をリポジトリの Actions シークレット **`FOLLOWME_TOKEN`** に登録することが必要です（Settings → Secrets and variables → Actions → New repository secret）。シークレット未登録の間は、ワークフローは通知を出して何もせず成功終了します（組み込みの GITHUB_TOKEN ではアカウント本人としてのフォローはできません）。
 
 ## followback（フォローバックが無い相手のフォロー解除）
 
