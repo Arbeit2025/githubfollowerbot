@@ -1,0 +1,44 @@
+name: followback-check
+
+# Manual-only follow-back check for followme-lite.
+# Always a DRY RUN: it reads the tracked follows recorded in
+# data/discover-state.json (written by `bot.discover --apply` runs) and
+# uploads a report of who has not followed back after 31+ days.
+# Actually unfollowing needs a personal token and is done locally:
+#   GITHUB_TOKEN=... python -m bot.followback --self Arbeit2025 --apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      user:
+        description: "Your GitHub username"
+        required: true
+        default: "Arbeit2025"
+      after_days:
+        description: "Days without a follow-back before an account is due"
+        required: true
+        default: "31"
+
+permissions:
+  contents: read
+
+jobs:
+  followback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Check follow-backs (dry run)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m bot.followback \
+            --self "${{ inputs.user }}" \
+            --after-days "${{ inputs.after_days }}" \
+            --out reports/followback.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: followback-report
+          path: reports/followback.md
