@@ -1,24 +1,30 @@
 # GitHub followers report: @Arbeit2025
 
-- Followers checked: 7
+- Followers checked: 8
 - Organizations: 0
 
 ## Tags (rule-based, from public profile fields)
 
-- developer: 6
+- developer: 7
 - bot-like: 2
 - student: 1
 
 ## Followers
 
+### [md-abu-kayser](https://github.com/md-abu-kayser) Md Abu Kayser
+
+- tags: developer / repos: 35 / followers: 6355 / following: 18782 / since: 2020-06-27
+- bio: Full-Stack Engineer ⚡ TypeScript • React • Next.js • Node.js | Building scalable, AI-powered web apps | Open to U.S. remote opportunities 🌍
+- Bangladesh
+
 ### [0xdefimaster](https://github.com/0xdefimaster) 0xdefimaster
 
-- tags: developer / repos: 5 / followers: 16 / following: 144 / since: 2022-08-23
+- tags: developer / repos: 6 / followers: 64 / following: 209 / since: 2022-08-23
 - bio: DeFi / Web3. TypeScript, Solidity, Next.js. Building portable investment strategies (Bag Protocol).
 
 ### [arcelen](https://github.com/arcelen) Arcelen
 
-- tags: developer / repos: 6 / followers: 15 / following: 69 / since: 2023-07-24
+- tags: developer / repos: 6 / followers: 16 / following: 69 / since: 2023-07-24
 - bio: CS Graduate | Founder of lightmenu.app | Barcelona
 - Barcelona, Spain
 
@@ -28,13 +34,13 @@
 
 ### [yumiaura](https://github.com/yumiaura) Olya Pi
 
-- tags: developer / repos: 40 / followers: 8490 / following: 27426 / since: 2025-09-29
+- tags: developer / repos: 40 / followers: 8504 / following: 27894 / since: 2025-09-29
 - bio: Astrologist, Psychologist, Developer.
 - 192.168.0.1
 
 ### [shahidazam2020-oss](https://github.com/shahidazam2020-oss) Shahid Azam
 
-- tags: bot-like, developer / repos: 24 / followers: 5657 / following: 52749 / since: 2025-11-09
+- tags: bot-like, developer / repos: 24 / followers: 5698 / following: 54738 / since: 2025-11-09
 - bio: 🎓 MSCS Candidate @ IMSciences Peshawar | AI & Healthcare ML Researcher (EEG Seizure Prediction) | Building Scalable Deep Learning Solutions
 - Institute of Management Sciences, Peshawar /  Cabinet Division Employees CHS E-17/3 E-17, Islamabad
 
@@ -46,7 +52,7 @@
 
 ### [ancaferro](https://github.com/ancaferro) Anca Kovach
 
-- tags: developer / repos: 4 / followers: 2792 / following: 6171 / since: 2026-05-24
+- tags: developer / repos: 4 / followers: 2804 / following: 6625 / since: 2026-05-24
 - bio: QA Engineer, Developer
 - Beograd, Srbija
 
