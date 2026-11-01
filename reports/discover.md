@@ -5,118 +5,117 @@
 - Star threshold: idea+skill > 16.0
 - Window: pushed within 24h
 - Repositories graded: 20
-- Follow candidates: 2
+- Follow candidates: 0
 - Star candidates: 0
 
 ## Graded repositories
 
-### [learn-ukrainian/learn-ukrainian.github.io](https://github.com/learn-ukrainian/learn-ukrainian.github.io)
+### [joelc67/hero-companion](https://github.com/joelc67/hero-companion)
 
-- idea: 7.5 / skill: 8.5 / total: 16.0
-- FOLLOW candidate (@learn-ukrainian)
-- why: clear, detailed description (+2.0 idea); 6 topic(s) (+1.5 idea); 11 stars (+0.5 idea); 5 forks (+1.0 skill); pushed within a week (+1.0 skill, +0.5 idea); maintained for 6+ months (+1.0 skill); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
-- description: Free open-source Ukrainian course. A1 to C2. Based on Ukrainian State Standard 2024. «Мова – душа народу»
+- idea: 5.5 / skill: 7.5 / total: 13.0
+- why: clear, detailed description (+2.0 idea); 1 fork(s) (+0.5 skill); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); license: NOASSERTION (+0.5 skill); primary language detected (+0.5 skill)
+- description: Hero Companion - a free, offline City of Heroes: Homecoming build planner that optimizes from the game's actual math. Unofficial fan project; free & noncommercial forever (CC BY-NC-SA 4.0).
 
-### [Kkritos/Rapster](https://github.com/Kkritos/Rapster)
-
-- idea: 6.0 / skill: 8.5 / total: 14.5
-- FOLLOW candidate (@Kkritos)
-- why: clear, detailed description (+2.0 idea); 16 stars (+0.5 idea); 7 forks (+1.0 skill); pushed within a week (+1.0 skill, +0.5 idea); maintained for 6+ months (+1.0 skill); substantial codebase, 1MB+ (+1.5 skill); license: GPL-3.0 (+0.5 skill); primary language detected (+0.5 skill)
-- description: Rapid population synthesis code for compact object coalescences and tidal disruptions in dynamical environments.
-
-### [sudosubin/agents.nix](https://github.com/sudosubin/agents.nix)
-
-- idea: 6.0 / skill: 8.0 / total: 14.0
-- why: clear, detailed description (+2.0 idea); 20 stars (+0.5 idea); 2 fork(s) (+0.5 skill); pushed within a week (+1.0 skill, +0.5 idea); maintained for 6+ months (+1.0 skill); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
-- description: Nixpkgs overlay for AI agent skills from skills.sh and skillsdirectory.com
-
-### [7rido/espero-trading-harness-wip-claude-ds-revision-v1.1](https://github.com/7rido/espero-trading-harness-wip-claude-ds-revision-v1.1)
-
-- idea: 7.0 / skill: 6.5 / total: 13.5
-- why: clear, detailed description (+2.0 idea); 4 topic(s) (+1.5 idea); pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
-- description: Espero Trading Harness WIP-CLAUDE/DS Revision v1.1
-
-### [Vipast82/foundry-router](https://github.com/Vipast82/foundry-router)
+### [Pukujan/agent-stack-train](https://github.com/Pukujan/agent-stack-train)
 
 - idea: 5.5 / skill: 7.0 / total: 12.5
-- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
-- description: (ALL AI GENERATED) This is an AI managed AI Router - for different tasks to go to different AI models and its chosen by an AI Brain to decide where.
+- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); license: NOASSERTION (+0.5 skill); primary language detected (+0.5 skill)
+- description: The certified version set (release train) of the agent stack — one place adopters read compatible component versions from.
 
-### [jazzthepig/looloomi-ai](https://github.com/jazzthepig/looloomi-ai)
+### [mwqwf/rafiq-align-ci](https://github.com/mwqwf/rafiq-align-ci)
 
-- idea: 4.5 / skill: 7.0 / total: 11.5
-- why: description present (+1.0 idea); pushed within a week (+1.0 skill, +0.5 idea); maintained for 6+ months (+1.0 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-- description: On-Chain Institutional Intelligence
+- idea: 5.5 / skill: 6.5 / total: 12.0
+- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
+- description: Temporary compute repo: Quran recitation alignment indexing on GitHub runners (Rafiq)
 
-### [ITlusions/ITL.ControlPlane.ResourceProvider.Network](https://github.com/ITlusions/ITL.ControlPlane.ResourceProvider.Network)
+### [tritrisha/DSA-Learning](https://github.com/tritrisha/DSA-Learning)
 
 - idea: 5.5 / skill: 6.0 / total: 11.5
-- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); some code present (+0.5 skill); license: NOASSERTION (+0.5 skill); primary language detected (+0.5 skill)
-- description: Azure-style networking abstractions on Kubernetes with Cilium SDN. Multi-tenant isolation, multi-cluster resilience, direct VLAN IP assignment, and overlapping CIDR support for ITL Control Plane.
+- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); mid-size codebase (+1.0 skill); primary language detected (+0.5 skill)
+- description: A collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0)
 
-### [basimstore-com/cryptix-file-expander](https://github.com/basimstore-com/cryptix-file-expander)
+### [KalDT13/Kalkid-Retro](https://github.com/KalDT13/Kalkid-Retro)
+
+- idea: 4.5 / skill: 6.5 / total: 11.0
+- why: description present (+1.0 idea); pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
+- description: Application multicompte Dofus Rétro
+
+### [phatnguyen03022001/third-party-standards](https://github.com/phatnguyen03022001/third-party-standards)
 
 - idea: 5.5 / skill: 5.5 / total: 11.0
-- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
-- description: CRYPTIX SHADOW KERNEL HEX - File expander (educational). Interactive Python tool to expand files up to 4GB. Use responsibly.
+- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); mid-size codebase (+1.0 skill); primary language detected (+0.5 skill)
+- description: Third-party service taxonomy and evaluation standards for Fullstack, AI, and Agentic systems
 
-### [Kelvinirawanc/anak_krakatau_dashboard_v4](https://github.com/Kelvinirawanc/anak_krakatau_dashboard_v4)
+### [TheGoatArtist/OpenRAGE](https://github.com/TheGoatArtist/OpenRAGE)
 
 - idea: 5.5 / skill: 5.5 / total: 11.0
-- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); some code present (+0.5 skill); primary language detected (+0.5 skill)
-- description: Monitoring eruption activity, aviation disruption, population exposure, health response, and regional impacts.
+- why: clear, detailed description (+2.0 idea); 1 fork(s) (+0.5 skill); pushed within a week (+1.0 skill, +0.5 idea); some code present (+0.5 skill); primary language detected (+0.5 skill)
+- description: A modern source port that reverse engineers the engine and binaries of id Software's 2011 video-game titled RAGE.
 
-### [phxnkhlay/rebmetpeS](https://github.com/phxnkhlay/rebmetpeS)
+### [lfatessari/Religioteca](https://github.com/lfatessari/Religioteca)
+
+- idea: 4.5 / skill: 6.0 / total: 10.5
+- why: description present (+1.0 idea); pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
+- description: repositório para automação
+
+### [ss30101999/whale-tracker](https://github.com/ss30101999/whale-tracker)
 
 - idea: 3.5 / skill: 6.5 / total: 10.0
 - why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
 
-### [wecloud11223/wechatpad-hermes](https://github.com/wecloud11223/wechatpad-hermes)
+### [DHIRAJ-6-8-7/Backend-and-Distributed-system](https://github.com/DHIRAJ-6-8-7/Backend-and-Distributed-system)
+
+- idea: 5.5 / skill: 4.5 / total: 10.0
+- why: clear, detailed description (+2.0 idea); pushed within a week (+1.0 skill, +0.5 idea); primary language detected (+0.5 skill)
+- description: A hands-on backend engineering project evolving into a distributed task-processing platform.
+
+### [SandeshSatishhNaik/Traffic-Forecasting-and-Congestion-Optimization](https://github.com/SandeshSatishhNaik/Traffic-Forecasting-and-Congestion-Optimization)
+
+- idea: 3.5 / skill: 6.5 / total: 10.0
+- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
+
+### [mezon664/ppt2-stats-overlay](https://github.com/mezon664/ppt2-stats-overlay)
+
+- idea: 3.5 / skill: 6.5 / total: 10.0
+- why: pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); license: GPL-3.0 (+0.5 skill); primary language detected (+0.5 skill)
+
+### [anthracite-labs/OpenCodie](https://github.com/anthracite-labs/OpenCodie)
 
 - idea: 3.5 / skill: 6.5 / total: 10.0
 - why: pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
 
-### [arqmarquesdc/CriptoMarquitos_botV2](https://github.com/arqmarquesdc/CriptoMarquitos_botV2)
-
-- idea: 3.5 / skill: 6.5 / total: 10.0
-- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-
-### [AlejandroLay/ccbot](https://github.com/AlejandroLay/ccbot)
-
-- idea: 3.5 / skill: 6.5 / total: 10.0
-- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-
-### [cipriansoleriu/copytrade-gencay](https://github.com/cipriansoleriu/copytrade-gencay)
-
-- idea: 3.5 / skill: 6.5 / total: 10.0
-- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-
-### [jse32100/claude-monitor](https://github.com/jse32100/claude-monitor)
-
-- idea: 3.5 / skill: 6.5 / total: 10.0
-- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-
-### [kxtof/forum-karlin-tracking](https://github.com/kxtof/forum-karlin-tracking)
-
-- idea: 3.5 / skill: 6.5 / total: 10.0
-- why: pushed within a week (+1.0 skill, +0.5 idea); older than a month (+0.5 skill); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
-
-### [tylxr59/Hearth](https://github.com/tylxr59/Hearth)
+### [yogesh660/learning-institute](https://github.com/yogesh660/learning-institute)
 
 - idea: 3.5 / skill: 6.0 / total: 9.5
-- why: pushed within a week (+1.0 skill, +0.5 idea); mid-size codebase (+1.0 skill); license: MIT (+0.5 skill); primary language detected (+0.5 skill)
+- why: pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
 
-### [zapomniusername1-boop/Ltc-bot](https://github.com/zapomniusername1-boop/Ltc-bot)
+### [seabeen927349-hub/-hengce-live-quotes](https://github.com/seabeen927349-hub/-hengce-live-quotes)
+
+- idea: 3.5 / skill: 6.0 / total: 9.5
+- why: pushed within a week (+1.0 skill, +0.5 idea); substantial codebase, 1MB+ (+1.5 skill); primary language detected (+0.5 skill)
+
+### [GGDecStar443/GG](https://github.com/GGDecStar443/GG)
+
+- idea: 3.5 / skill: 6.0 / total: 9.5
+- why: pushed within a week (+1.0 skill, +0.5 idea); mid-size codebase (+1.0 skill); license: NOASSERTION (+0.5 skill); primary language detected (+0.5 skill)
+
+### [prakashanubha02-newcomer/TOURISM_PACKAGE_PREDICTION_Anubha](https://github.com/prakashanubha02-newcomer/TOURISM_PACKAGE_PREDICTION_Anubha)
+
+- idea: 3.5 / skill: 5.5 / total: 9.0
+- why: pushed within a week (+1.0 skill, +0.5 idea); mid-size codebase (+1.0 skill); primary language detected (+0.5 skill)
+- description: xyz
+
+### [spoorthimekala/Auto_ML_Deploy](https://github.com/spoorthimekala/Auto_ML_Deploy)
 
 - idea: 3.5 / skill: 5.0 / total: 8.5
 - why: pushed within a week (+1.0 skill, +0.5 idea); some code present (+0.5 skill); primary language detected (+0.5 skill)
 
-### [mohith890417/leet-code](https://github.com/mohith890417/leet-code)
+### [mehrmedicalcenter7777-cmyk/mehr-telegram-bot](https://github.com/mehrmedicalcenter7777-cmyk/mehr-telegram-bot)
 
 - idea: 3.5 / skill: 5.0 / total: 8.5
 - why: pushed within a week (+1.0 skill, +0.5 idea); some code present (+0.5 skill); primary language detected (+0.5 skill)
 
-### [vinaychamarbbdic-hash/vinayak-app](https://github.com/vinaychamarbbdic-hash/vinayak-app)
+### [lionelasif90-sudo/bot](https://github.com/lionelasif90-sudo/bot)
 
 - idea: 3.5 / skill: 4.5 / total: 8.0
 - why: pushed within a week (+1.0 skill, +0.5 idea); primary language detected (+0.5 skill)
