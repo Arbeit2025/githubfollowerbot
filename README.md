@@ -45,9 +45,11 @@ GITHUB_TOKEN=... python -m bot.discover --apply
 
 安全策：既定は dry-run で状態ファイルも変更しません。`--apply` のときだけ実行し、上限は **follow は1回3件まで、かつ1日（Asia/Tokyo）合計3件まで**（実行をまたいでも状態ファイルのフォローログで数えます）、star は1回10件まで。fork・アーカイブ済み・botアカウント・自分のリポジトリは除外し、実行済みは状態ファイル（`data/discover-state.json`）に記録して二度は実行しません。Actions の「followme-discover」ワークフローは手動実行のみで、常に dry-run のレポートを artifact に出すだけです。
 
-### 自動フォロー（1日最大3件）
+### 自動フォロー（現在は停止中）
 
-「followme-auto」ワークフローが毎日10:23 JST に1回、`--apply --follow-only`（スターはしない）で自動フォローし、状態ファイルとレポートを自動コミットします。有効化には、classic な個人アクセストークン（スコープ `user:follow`）をリポジトリの Actions シークレット **`FOLLOWME_TOKEN`** に登録することが必要です（Settings → Secrets and variables → Actions → New repository secret）。シークレット未登録の間は、ワークフローは通知を出して何もせず成功終了します（組み込みの GITHUB_TOKEN ではアカウント本人としてのフォローはできません）。
+「followme-auto」ワークフローは、数値判定で候補を自動フォローする仕組みとして用意しましたが、**2026-11-02 に運用者の判断で無効化し、現在は停止しています**（ワークフローファイル自体は無効化した状態で残しています）。再開しない限り、自動フォローは行われません。採点と候補レポート（followme-discover）は dry-run で継続しています。
+
+なお、動作していた当時の仕様は次のとおりです：毎日10:23 JST に1回、`--apply --follow-only`（スターはしない）で自動フォローし、状態ファイルとレポートを自動コミット。有効化には、classic な個人アクセストークン（スコープ `user:follow`）をリポジトリの Actions シークレット **`FOLLOWME_TOKEN`** に登録することが必要でした（組み込みの GITHUB_TOKEN ではアカウント本人としてのフォローはできません）。
 
 ## followback（フォローバックが無い相手のフォロー解除）
 
