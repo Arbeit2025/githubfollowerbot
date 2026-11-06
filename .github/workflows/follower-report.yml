@@ -29,7 +29,7 @@ jobs:
         run: |
           python -m bot.followers --user "${{ inputs.user }}" \
             --limit "${{ inputs.limit }}" --out followers-report.md
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: followers-report
           path: followers-report.md

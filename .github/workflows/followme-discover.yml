@@ -43,7 +43,7 @@ jobs:
             --language "${{ inputs.language }}" \
             --max-stars "${{ inputs.max_stars }}" \
             --out reports/discover.md
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: followme-discover-report
           path: reports/discover.md
