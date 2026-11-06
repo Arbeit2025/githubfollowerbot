@@ -1,11 +1,11 @@
 # GitHub followers report: @Arbeit2025
 
-- Followers checked: 8
+- Followers checked: 7
 - Organizations: 0
 
 ## Tags (rule-based, from public profile fields)
 
-- developer: 7
+- developer: 6
 - bot-like: 3
 - student: 1
 
@@ -13,14 +13,8 @@
 
 ### [ErBharatMalhotra](https://github.com/ErBharatMalhotra) Bharat Malhotra
 
-- tags: developer / repos: 17 / followers: 330 / following: 1811 / since: 2021-06-11
+- tags: developer / repos: 17 / followers: 360 / following: 1813 / since: 2021-06-11
 - bio: Founder · AI-native builder. I ship production web systems fast — solo.
-
-### [NazmusSayad](https://github.com/NazmusSayad) Nazmus Sayad
-
-- tags: developer / repos: 54 / followers: 8252 / following: 8387 / since: 2021-07-08
-- bio: Passionate Software Engineer | Building my dreams with code.
-- @OiPer / Khulna, Bangladesh
 
 ### [mofu-mitsu](https://github.com/mofu-mitsu) もふみつ
 
@@ -28,19 +22,19 @@
 
 ### [arielshakaramiro](https://github.com/arielshakaramiro) ArielShakaramiro
 
-- tags: bot-like, developer / repos: 61 / followers: 3768 / following: 8946 / since: 2025-06-25
+- tags: bot-like, developer / repos: 61 / followers: 3885 / following: 9673 / since: 2025-06-25
 - bio: AI Engineer in the making | LLM · RAG · CV · LangChain · OpenAI · n8n Workflow Automation
 - Singapore
 
 ### [yumiaura](https://github.com/yumiaura) Olya Pi
 
-- tags: developer / repos: 40 / followers: 8646 / following: 25836 / since: 2025-09-29
+- tags: developer / repos: 40 / followers: 8684 / following: 27264 / since: 2025-09-29
 - bio: Astrologist, Psychologist, Developer.
 - 192.168.0.1
 
 ### [shahidazam2020-oss](https://github.com/shahidazam2020-oss) Shahid Azam
 
-- tags: bot-like, developer / repos: 24 / followers: 6077 / following: 59644 / since: 2025-11-09
+- tags: bot-like, developer / repos: 24 / followers: 6240 / following: 61610 / since: 2025-11-09
 - bio: 🎓 MSCS Candidate @ IMSciences Peshawar | AI & Healthcare ML Researcher (EEG Seizure Prediction) | Building Scalable Deep Learning Solutions
 - Institute of Management Sciences, Peshawar /  Cabinet Division Employees CHS E-17/3 E-17, Islamabad
 
@@ -52,7 +46,7 @@
 
 ### [ancaferro](https://github.com/ancaferro) Anca Kovach
 
-- tags: developer / repos: 4 / followers: 2879 / following: 10401 / since: 2026-05-24
+- tags: developer / repos: 6 / followers: 2901 / following: 11665 / since: 2026-05-24
 - bio: QA Engineer, Developer
 - Beograd, Srbija
 
